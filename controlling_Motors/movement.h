@@ -14,10 +14,6 @@ AF_DCMotor motor2(2); // M2
 AF_DCMotor motor3(3); // M3
 AF_DCMotor motor4(4); // M4
 
-
-const int normal_speed = 200; // normal movement
-const int high_speed = 255;   // max speed
-const int slow_speed = 150;   // slow speed
 /*
  * setSpeed(speed) controls the motor speed.
  * speed ranges form 0 -> 255
@@ -27,18 +23,24 @@ const int slow_speed = 150;   // slow speed
  * RELEASE   - stops motor 
 */
 
+const int n_s = 150; // normal movement
+const int h_s = 255; // max speed
+const int l_s = 100; // slow speed
 
-void set_motorSpeed(int m1_speed, int m2_speed, int m3_speed, int m4_speed){
-  motor1.setSpeed(m1_speed);
-  motor2.setSpeed(m2_speed);
-  motor3.setSpeed(m3_speed);
-  motor4.setSpeed(m4_speed);
+
+void set_motorSpeed(int *mspeed){
+  motor1.setSpeed(mspeed[0]);
+  motor2.setSpeed(mspeed[1]);
+  motor3.setSpeed(mspeed[2]);
+  motor4.setSpeed(mspeed[3]);
 }
 
 
-// moving all wheels in forward direction
+// port m1, m2 are connected to back wheels
+// port m3, m4 are connected to front wheels
 void forward(){
-  set_motorSpeed(normal_speed, normal_speed, normal_speed, normal_speed);
+  int fun_speed[] = {n_s, n_s, n_s, n_s};
+  set_motorSpeed(fun_speed);
   motor1.run(FORWARD);
   motor2.run(FORWARD);
   motor3.run(FORWARD);
@@ -46,9 +48,9 @@ void forward(){
 }
 
 
-//moving all wheels in backward direction
 void backward(){
-  set_motorSpeed(normal_speed, normal_speed, normal_speed, normal_speed);
+   int fun_speed[] = {n_s, n_s, n_s, n_s};
+  set_motorSpeed(fun_speed);
   motor1.run(BACKWARD);
   motor2.run(BACKWARD);
   motor3.run(BACKWARD);
@@ -56,34 +58,36 @@ void backward(){
 }
 
 
-// moving right side wheels forward 
-// and left side wheels backwards
-void turn_left(){
-  set_motorSpeed(slow_speed, slow_speed, high_speed, high_speed);
-  
-  motor1.run(BACKWARD);
-  motor2.run(BACKWARD);
-  
-  motor3.run(FORWARD);
-  motor4.run(FORWARD);
-}
-
-
-// moving left side wheels forward 
-// and right side wheels backwards
+// moving only back wheels for stablity
+// right wheel forward left wheels backward
 void turn_right(){
-  set_motorSpeed(high_speed, high_speed, slow_speed, slow_speed);
+  int fun_speed[] = {l_s, l_s, 0, 0};
+  set_motorSpeed(fun_speed);
   
   motor1.run(FORWARD);
-  motor2.run(FORWARD);
+  motor2.run(BACKWARD);
   
-  motor3.run(BACKWARD);
-  motor4.run(BACKWARD);
+  motor3.run(RELEASE);
+  motor4.run(RELEASE);
 }
 
 
-// stoping motor
+// left wheel forward right wheel backward
+void turn_left(){
+  int fun_speed[] = {l_s, l_s, 0, 0};
+  set_motorSpeed(fun_speed);
+  
+  motor1.run(BACKWARD);
+  motor2.run(FORWARD);
+  
+  motor3.run(RELEASE);
+  motor4.run(RELEASE);
+}
+
+
 void stop_motor(){
+  int fun_speed[] = {0, 0, 0, 0};
+  set_motorSpeed(fun_speed);
   motor1.run(RELEASE);
   motor2.run(RELEASE);
   motor3.run(RELEASE);

@@ -1,44 +1,20 @@
 /*
  * simple robot car
+ 1) stable movement
 */
 
 #include "movement.h"
 
+const int fun_speed[] = {150, 150, 150, 150};
 
-void setup() {
-  // put your setup code here, to run once:
-
+void setup()
   // initilizing all motors with normal speed
-  set_motorSpeed(normal_speed, normal_speed, normal_speed, normal_speed);
-
+  set_motorSpeed(fun_speed);
   // stoping all the motors
   stop_motor();
+  Serial.begin(9600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  forward();
-  delay(3000);
-  stop_motor();
-
-  delay(1000);
   
-  turn_right();
-  delay(2000);
-  stop_motor();
-
-  delay(1000);
-  
-  backward();
-  delay(3000);
-  stop_motor();
-
-  delay(1000);
-
-  turn_left();
-  delay(2000);
-  stop_motor();
-
-  delay(1000);
-
 }
