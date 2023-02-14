@@ -8,24 +8,27 @@
  *        else LOW
 */
 
-const int l_s = A0;
-const int r_s = A5;
+const int left_sensor = A5;
+const int right_sensor = A0;
 
 
 /*
- * return 1 if line on left
- * return 2 if line on right
+ * return 1 if line on right
+ * return 2 if line on left
  * return 0 if reached goal
  * return -1 if line not detected
 */
 int detect_line(){
-  if(l_s == 1 && r_s == 0){
+  int left_val = digitalRead(left_sensor);
+  int right_val = digitalRead(right_sensor);
+  
+  if(left_val == 1 && right_val == 0){
     return 1;
   }
-  else if(r_s == 1 && l_s == 0){
+  else if(right_val == 1 && left_val == 0){
     return 2;
   }
-  else if(r_s == 0 && l_s == 0{
+  else if(right_val == 0 && left_val == 0){
     return 0;
   }
   return -1;

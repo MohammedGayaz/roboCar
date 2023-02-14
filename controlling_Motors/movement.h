@@ -61,7 +61,7 @@ void backward(){
 // moving only back wheels for stablity
 // right wheel forward left wheels backward
 void turn_right(){
-  int fun_speed[] = {l_s, l_s, 0, 0};
+  int fun_speed[] = {h_s, n_s, 0, 0};
   set_motorSpeed(fun_speed);
   
   motor1.run(FORWARD);
@@ -74,7 +74,7 @@ void turn_right(){
 
 // left wheel forward right wheel backward
 void turn_left(){
-  int fun_speed[] = {l_s, l_s, 0, 0};
+  int fun_speed[] = {n_s, h_s, 0, 0};
   set_motorSpeed(fun_speed);
   
   motor1.run(BACKWARD);
