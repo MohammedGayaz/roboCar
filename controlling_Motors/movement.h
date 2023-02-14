@@ -23,37 +23,42 @@ AF_DCMotor motor4(4); // M4
  * RELEASE   - stops motor 
 */
 
-const int n_s = 150; // normal movement
+const int n_s = 125; // normal movement
 const int h_s = 255; // max speed
-const int l_s = 100; // slow speed
+const int l_s = 80; // slow speed
 
 
-void set_motorSpeed(int *mspeed){
-  motor1.setSpeed(mspeed[0]);
-  motor2.setSpeed(mspeed[1]);
-  motor3.setSpeed(mspeed[2]);
-  motor4.setSpeed(mspeed[3]);
-}
+
 
 
 // port m1, m2 are connected to back wheels
 // port m3, m4 are connected to front wheels
 void forward(){
-  int fun_speed[] = {n_s, n_s, n_s, n_s};
-  set_motorSpeed(fun_speed);
+  motor1.setSpeed(l_s);
   motor1.run(FORWARD);
+
+  motor2.setSpeed(l_s);
   motor2.run(FORWARD);
+
+  motor3.setSpeed(l_s);
   motor3.run(FORWARD);
+
+  motor4.setSpeed(l_s);
   motor4.run(FORWARD);
 }
 
 
 void backward(){
-   int fun_speed[] = {n_s, n_s, n_s, n_s};
-  set_motorSpeed(fun_speed);
+  motor1.setSpeed(l_s);
   motor1.run(BACKWARD);
+  
+  motor2.setSpeed(l_s);
   motor2.run(BACKWARD);
+
+  motor3.setSpeed(l_s);
   motor3.run(BACKWARD);
+
+  motor4.setSpeed(l_s);
   motor4.run(BACKWARD); 
 }
 
@@ -61,35 +66,44 @@ void backward(){
 // moving only back wheels for stablity
 // right wheel forward left wheels backward
 void turn_right(){
-  int fun_speed[] = {h_s, n_s, 0, 0};
-  set_motorSpeed(fun_speed);
-  
+  motor1.setSpeed(h_s);
   motor1.run(FORWARD);
+
+  motor2.setSpeed(h_s);
   motor2.run(BACKWARD);
-  
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
+
+  motor3.setSpeed(l_s);
+  motor3.run(BACKWARD);
+
+  motor4.setSpeed(l_s);
+  motor4.run(FORWARD);
 }
 
 
 // left wheel forward right wheel backward
 void turn_left(){
-  int fun_speed[] = {n_s, h_s, 0, 0};
-  set_motorSpeed(fun_speed);
-  
+  motor1.setSpeed(h_s);
   motor1.run(BACKWARD);
+  motor2.setSpeed(h_s);
   motor2.run(FORWARD);
-  
-  motor3.run(RELEASE);
-  motor4.run(RELEASE);
+
+  motor3.setSpeed(l_s);
+  motor3.run(FORWARD);
+  motor4.setSpeed(l_s);
+  motor4.run(BACKWARD);
 }
 
 
 void stop_motor(){
-  int fun_speed[] = {0, 0, 0, 0};
-  set_motorSpeed(fun_speed);
+  motor1.setSpeed(125);
   motor1.run(RELEASE);
+
+  motor2.setSpeed(125);
   motor2.run(RELEASE);
+
+  motor3.setSpeed(125);
   motor3.run(RELEASE);
+
+  motor4.setSpeed(125);
   motor4.run(RELEASE);
 }
