@@ -1,25 +1,26 @@
-
 # Robot car
 
-A Simple Car that is controlled by Arduino Uno and l293D motor driver.
+Building an intelligent robot car.
 
-## Functionality
-- Follow line
-- Avoid Obstacle
+## Functions
 
-
-
+- [x]  Follow line
+- [ ]  Avoid Obstacle
+- [ ]  Controll using Ros 2
+- [ ]  Controll remotly
 
 ## Components
+
 - Arduino Uno
-- l293D driver shield
-- Bo motors (x4)
+- L293D driver shield
+- TT motors (x4)
 - IR sensors (x2)
 - 4WD Car Chassis
-- Joy stick (Optinal)
 - 2 Pin SPST on-off-on Switch
-- 9V Battry
+- Lipo Battry
 - Some Jumper Wires
+
 ## Reference
 
-- [lastminuteengineers](https://lastminuteengineers.com/l293d-motor-driver-shield-arduino-tutorial/)
+- [Blog on L293D Motor Sheild](https://lastminuteengineers.com/l293d-motor-driver-shield-arduino-tutorial/)
+
